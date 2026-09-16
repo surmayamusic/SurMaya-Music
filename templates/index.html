@@ -1,876 +1,654 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-<meta name="google-site-verification" content="NSopXomdXTTe9f2aJCHxA6asCndcHdN5iILE8Xnt6v8" />
-
-<title>SurMaya Music | Lofi</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f8f1e5;
-    color:#171717;
-}
-
-/* ================= HEADER ================= */
-
-header{
-    height:82px;
-    padding:0 7%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    background:rgba(248,241,229,.88);
-    backdrop-filter:blur(20px);
-
-    border-bottom:1px solid rgba(0,0,0,.08);
-
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.logo{
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:-1px;
-}
-
-.logo span{
-    background:linear-gradient(
-        90deg,
-        #008cff,
-        #743cff,
-        #ff2388,
-        #ff7600
-    );
-
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-nav{
-    display:flex;
-    gap:32px;
-}
-
-nav a{
-    color:#333;
-    text-decoration:none;
-    font-size:14px;
-    font-weight:600;
-}
-
-nav a:hover{
-    color:#7a45e8;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-    min-height:610px;
-    padding:90px 7%;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    position:relative;
-    overflow:hidden;
-}
-
-/* colorful background glow */
-
-.hero::before{
-    content:"";
-    position:absolute;
-
-    width:650px;
-    height:650px;
-
-    right:-180px;
-    top:-180px;
-
-    background:
-        radial-gradient(circle,
-        rgba(0,140,255,.22),
-        rgba(255,40,150,.14),
-        transparent 68%);
-
-    filter:blur(20px);
-}
-
-.hero-text{
-    max-width:650px;
-    position:relative;
-    z-index:2;
-}
-
-.eyebrow{
-    font-size:12px;
-    font-weight:bold;
-    letter-spacing:4px;
-    margin-bottom:25px;
-
-    background:linear-gradient(
-        90deg,
-        #008cff,
-        #743cff,
-        #ff2388,
-        #ff7600
-    );
-
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.hero h1{
-    font-size:clamp(55px,8vw,100px);
-    line-height:.9;
-    letter-spacing:-6px;
-    margin-bottom:30px;
-}
-
-.gradient-text{
-    background:
-        linear-gradient(
-            90deg,
-            #008cff,
-            #603cff,
-            #ff2388,
-            #ff7600
-        );
-
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.hero-description{
-    max-width:540px;
-    color:#666;
-    font-size:17px;
-    line-height:1.8;
-    margin-bottom:35px;
-}
-
-.listen-btn{
-    border:none;
-    padding:15px 27px;
-    border-radius:40px;
-
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-
-    background:
-        linear-gradient(
-            100deg,
-            #008cff,
-            #713cff,
-            #ff2388,
-            #ff7600
-        );
-
-    box-shadow:0 12px 30px rgba(100,70,220,.25);
-
-    transition:.3s;
-}
-
-.listen-btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 18px 35px rgba(100,70,220,.35);
-}
-
-/* ================= LOGO VISUAL ================= */
-
-.logo-visual{
-    width:380px;
-    height:380px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    position:relative;
-
-    background:
-        radial-gradient(
-            circle at 30% 30%,
-            #00c8ff,
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 70% 35%,
-            #ff2791,
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 55% 75%,
-            #ff8a00,
-            transparent 32%
-        ),
-        #eee3d0;
-
-    box-shadow:
-        0 35px 80px rgba(0,0,0,.12);
-
-    animation:float 6s ease-in-out infinite;
-}
-
-.logo-ring{
-    width:245px;
-    height:125px;
-
-    border-radius:50%;
-
-    border:30px solid transparent;
-
-    background:
-        linear-gradient(
-            100deg,
-            #008cff,
-            #743cff,
-            #ff2388,
-            #ff7600,
-            #70c900
-        ) border-box;
-
-    -webkit-mask:
-        linear-gradient(#000 0 0) padding-box,
-        linear-gradient(#000 0 0);
-
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
-
-    transform:rotate(8deg);
-}
-
-@keyframes float{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-15px);
-    }
-
-}
-
-/* ================= MUSIC SECTION ================= */
-
-.music-section{
-    padding:80px 7%;
-    background:#fffaf2;
-}
-
-.section-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:35px;
-}
-
-.section-label{
-    font-size:12px;
-    font-weight:bold;
-    letter-spacing:3px;
-    color:#777;
-    margin-bottom:10px;
-}
-
-.section-title{
-    font-size:42px;
-    letter-spacing:-2px;
-}
-
-.song-count{
-    color:#777;
-    font-size:14px;
-}
-
-/* ================= SONG CARDS ================= */
-
-.songs{
-    display:grid;
-    grid-template-columns:
-        repeat(auto-fill,minmax(250px,1fr));
-
-    gap:22px;
-}
-
-.song{
-    background:white;
-
-    border:1px solid #e9e2d8;
-
-    border-radius:22px;
-
-    padding:15px;
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.05);
-
-    transition:.35s;
-}
-
-.song:hover{
-    transform:translateY(-7px);
-
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.10);
-}
-
-.cover{
-    aspect-ratio:1;
-
-    border-radius:17px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:55px;
-
-    margin-bottom:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #e8f7ff,
-            #eee5ff,
-            #ffe4f0,
-            #fff0d7
-        );
-}
-
-.song h3{
-    font-size:17px;
-    margin-bottom:7px;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.song p{
-    font-size:13px;
-    color:#888;
-    margin-bottom:15px;
-}
-
-audio{
-    width:100%;
-    height:38px;
-}
-
-/* ================= CEO ================= */
-
-.ceo{
-    padding:100px 7%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.ceo-card{
-    width:100%;
-    max-width:1000px;
-
-    border-radius:30px;
-
-    padding:55px;
-
-    background:white;
-
-    border:1px solid #e7ded1;
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.08);
-
-    display:flex;
-    align-items:center;
-    gap:45px;
-
-    position:relative;
-    overflow:hidden;
-}
-
-.ceo-card::after{
-    content:"";
-
-    position:absolute;
-
-    width:300px;
-    height:300px;
-
-    right:-100px;
-    bottom:-150px;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #008cff,
-            #743cff,
-            #ff2388,
-            #ff7600
-        );
-
-    filter:blur(70px);
-    opacity:.15;
-}
-
-.ceo-avatar{
-    width:120px;
-    height:120px;
-
-    flex-shrink:0;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:35px;
-    font-weight:bold;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #008cff,
-            #743cff,
-            #ff2388,
-            #ff7600
-        );
-}
-
-.ceo-small{
-    color:#888;
-    font-size:12px;
-    letter-spacing:3px;
-    margin-bottom:10px;
-}
-
-.ceo-name{
-    font-size:38px;
-    letter-spacing:-1px;
-    margin-bottom:10px;
-}
-
-.ceo-title{
-    color:#666;
-    line-height:1.7;
-}
-
-/* ================= UPLOAD ================= */
-
-.upload-section{
-    padding:20px 7% 100px;
-}
-
-.upload-box{
-    max-width:900px;
-    margin:auto;
-
-    text-align:center;
-
-    padding:55px 30px;
-
-    border-radius:25px;
-
-    border:1px dashed #c9c0b4;
-
-    background:#fffaf2;
-}
-
-.upload-box h2{
-    font-size:30px;
-    margin-bottom:10px;
-}
-
-.upload-box p{
-    color:#888;
-    margin-bottom:25px;
-}
-
-.file-input{
-    margin-bottom:20px;
-}
-
-.upload-btn{
-    border:none;
-
-    padding:12px 25px;
-
-    border-radius:30px;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            100deg,
-            #008cff,
-            #743cff,
-            #ff2388,
-            #ff7600
-        );
-
-    cursor:pointer;
-}
-
-/* ================= EMPTY ================= */
-
-.empty{
-    padding:50px;
-    text-align:center;
-    color:#888;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-    padding:40px 7%;
-
-    text-align:center;
-
-    border-top:1px solid #e5ded4;
-
-    color:#888;
-
-    background:#f8f1e5;
-}
-
-.footer-brand{
-    font-size:22px;
-    font-weight:bold;
-    color:#222;
-    margin-bottom:8px;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:750px){
-
-    header{
-        padding:0 5%;
-    }
-
-    nav{
-        display:none;
-    }
-
-    .hero{
-        padding:70px 6%;
-        text-align:center;
-        flex-direction:column;
-        gap:60px;
-    }
-
-    .hero h1{
-        letter-spacing:-4px;
-    }
-
-    .hero-description{
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    .logo-visual{
-        width:260px;
-        height:260px;
-    }
-
-    .logo-ring{
-        width:175px;
-        height:95px;
-        border-width:22px;
-    }
-
-    .music-section{
-        padding:60px 6%;
-    }
-
-    .section-top{
-        display:block;
-    }
-
-    .section-title{
-        font-size:35px;
-    }
-
-    .ceo{
-        padding:70px 6%;
-    }
-
-    .ceo-card{
-        padding:35px 25px;
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .ceo-name{
-        font-size:30px;
-    }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="google-site-verification"
+          content="NSopXomdXTTe9f2aJCHxA6asCndcHdN5iILE8Xnt6v8" />
+
+    <title>SurMaya Music | Dil Se Suno</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(255, 205, 80, .18), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(170, 100, 255, .12), transparent 28%),
+                linear-gradient(135deg, #fffdf8, #f7f3ec 50%, #ffffff);
+            color: #171717;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(18px);
+            background: rgba(255,255,255,.82);
+            border-bottom: 1px solid rgba(0,0,0,.08);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #111;
+            font-weight: 800;
+            font-size: 20px;
+        }
+
+        .brand img {
+            width: 46px;
+            height: 46px;
+            object-fit: contain;
+        }
+
+        .brand span {
+            background: linear-gradient(90deg, #9a6815, #d9a72d, #8d5d0d);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: .25s;
+        }
+
+        nav a:hover {
+            color: #a36b10;
+        }
+
+        .nav-search {
+            padding: 9px 13px;
+            width: 190px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            outline: none;
+            background: white;
+        }
+
+        /* HERO */
+
+        .hero {
+            max-width: 1200px;
+            margin: auto;
+            min-height: 620px;
+            padding: 90px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-inner {
+            max-width: 850px;
+        }
+
+        .hero-logo {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,.12));
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 30px;
+            background: rgba(201,153,45,.12);
+            color: #8c6118;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 8vw, 92px);
+            line-height: .95;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg, #76500d, #d8a72c, #9a6815);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #666;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 13px 23px;
+            border-radius: 30px;
+            font-weight: 700;
+            transition: .25s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #b47a16, #e0b43c);
+            color: white;
+            box-shadow: 0 10px 25px rgba(164,112,18,.25);
+        }
+
+        .btn-secondary {
+            border: 1px solid #ddd;
+            color: #333;
+            background: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* SECTIONS */
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title small {
+            color: #a16c10;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            margin-top: 8px;
+        }
+
+        /* SEARCH */
+
+        .music-search {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .music-search input {
+            width: 100%;
+            padding: 17px 22px;
+            border: 1px solid #ddd;
+            border-radius: 40px;
+            outline: none;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,.05);
+            font-size: 15px;
+        }
+
+        /* SONGS */
+
+        .songs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .song-card {
+            background: rgba(255,255,255,.82);
+            border: 1px solid rgba(0,0,0,.08);
+            border-radius: 22px;
+            padding: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.06);
+            transition: .3s;
+        }
+
+        .song-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(0,0,0,.1);
+        }
+
+        .cover {
+            height: 180px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                linear-gradient(135deg, #161616, #8d651d, #e0b54c);
+            color: white;
+            font-size: 50px;
+            margin-bottom: 18px;
+        }
+
+        .song-card h3 {
+            margin-bottom: 8px;
+            font-size: 19px;
+        }
+
+        .song-card p {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 14px;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #777;
+            padding: 30px;
+            display: none;
+        }
+
+        /* ABOUT */
+
+        .about-box {
+            border-radius: 30px;
+            padding: 55px 35px;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,.95), rgba(250,242,220,.9));
+            border: 1px solid rgba(179,132,42,.18);
+            text-align: center;
+        }
+
+        .about-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .about-box h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .about-box p {
+            max-width: 720px;
+            margin: auto;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .ceo {
+            margin-top: 25px;
+            font-weight: 800;
+            color: #9b6914;
+        }
+
+        /* UPLOAD */
+
+        .upload-box {
+            max-width: 600px;
+            margin: auto;
+            padding: 35px;
+            background: white;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            box-shadow: 0 15px 40px rgba(0,0,0,.06);
+        }
+
+        .upload-box input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .upload-box button {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #a66e12, #dfb13b);
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 50px;
+            padding: 35px 20px;
+            text-align: center;
+            background: #111;
+            color: #aaa;
+        }
+
+        footer strong {
+            color: #e0b33d;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 800px) {
+            nav {
+                display: none;
+            }
+
+            .nav-search {
+                width: 130px;
+            }
+
+            .hero {
+                min-height: 550px;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
-
-<!-- HEADER -->
-
 <header>
+    <div class="nav">
 
-    <div class="logo">
-        SurMaya <span>Music</span>
+        <a href="#home" class="brand">
+            <img src="{{ url_for('static', filename='surmaya-logo.png') }}"
+                 alt="SurMaya Music Logo">
+            <span>SurMaya Music</span>
+        </a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#music">Music</a>
+            <a href="#about">About</a>
+            <a href="#upload">Upload</a>
+        </nav>
+
+        <input
+            class="nav-search"
+            id="topSearch"
+            type="text"
+            placeholder="Search music..."
+        >
+
     </div>
-
-    <nav>
-        <a href="/">Home</a>
-        <a href="#music">Music</a>
-        <a href="#ceo">About</a>
-        <a href="#upload">Upload</a>
-    </nav>
-
 </header>
-
 
 
 <!-- HERO -->
 
-<section class="hero">
+<main id="home">
 
-    <div class="hero-text">
+    <div class="hero">
 
-        <div class="eyebrow">
-            SURMAYA MUSIC
-        </div>
+        <div class="hero-inner">
 
-        <h1>
-            Your world.<br>
-            Your <span class="gradient-text">sound.</span>
-        </h1>
+            <img
+                class="hero-logo"
+                src="{{ url_for('static', filename='surmaya-logo.png') }}"
+                alt="SurMaya Music"
+            >
 
-        <p class="hero-description">
-            Welcome to SurMaya Music — a home for
-            carefully crafted Lofi sounds, peaceful
-            melodies and late-night vibes.
-        </p>
+            <div class="tag">SURMAYA MUSIC</div>
 
-        <button
-            class="listen-btn"
-            onclick="document.getElementById('music').scrollIntoView()">
-
-            🎧 Explore Lofi
-
-        </button>
-
-    </div>
-
-
-    <div class="logo-visual">
-
-        <div class="logo-ring"></div>
-
-    </div>
-
-</section>
-
-
-
-<!-- MUSIC -->
-
-<section class="music-section" id="music">
-
-    <div class="section-top">
-
-        <div>
-
-            <div class="section-label">
-                LISTEN NOW
-            </div>
-
-            <h2 class="section-title">
-                Latest Lofi
-            </h2>
-
-        </div>
-
-        <div class="song-count">
-            Your music library
-        </div>
-
-    </div>
-
-
-    {% if songs %}
-
-    <div class="songs">
-
-        {% for song in songs %}
-
-        <div class="song">
-
-            <div class="cover">
-                🎵
-            </div>
-
-            <h3>
-                {{ song.rsplit('.',1)[0] }}
-            </h3>
+            <h1>
+                Your World.<br>
+                <span>Your Sound.</span>
+            </h1>
 
             <p>
-                SurMaya Music • Lofi
+                Discover soulful music, lofi sounds and new voices —
+                created for people who believe that music is more than sound.
             </p>
 
-            <audio controls preload="none">
+            <div class="hero-buttons">
+                <a href="#music" class="btn btn-primary">
+                    Explore Music
+                </a>
 
-                <source
-                    src="{{ url_for('songs', filename=song) }}">
-
-            </audio>
-
-        </div>
-
-        {% endfor %}
-
-    </div>
-
-    {% else %}
-
-    <div class="empty">
-
-        🎧 Your Lofi library is empty.<br>
-        Upload your first track below.
-
-    </div>
-
-    {% endif %}
-
-</section>
-
-
-
-<!-- CEO -->
-
-<section class="ceo" id="ceo">
-
-    <div class="ceo-card">
-
-        <div class="ceo-avatar">
-            AR
-        </div>
-
-        <div>
-
-            <div class="ceo-small">
-                CEO OF SURMAYA MUSIC
+                <a href="#about" class="btn btn-secondary">
+                    About SurMaya
+                </a>
             </div>
 
-            <h2 class="ceo-name">
-                Aayush Raj
-            </h2>
-
-            <p class="ceo-title">
-                Founder & CEO of SurMaya Music.
-                Building a modern home for independent
-                music, Lofi sounds and emerging artists.
-            </p>
-
         </div>
 
     </div>
 
-</section>
 
+    <!-- MUSIC -->
 
+    <section id="music">
 
-<!-- UPLOAD -->
+        <div class="section-title">
+            <small>OUR MUSIC</small>
+            <h2>Listen. Feel. Repeat.</h2>
+        </div>
 
-<section class="upload-section" id="upload">
-
-    <div class="upload-box">
-
-        <h2>
-            Add New Music
-        </h2>
-
-        <p>
-            Upload your Lofi track to the SurMaya Music library.
-        </p>
-
-
-        <form
-            action="/upload"
-            method="POST"
-            enctype="multipart/form-data">
-
+        <div class="music-search">
             <input
-                class="file-input"
-                type="file"
-                name="song"
-                accept=".mp3,.wav,.ogg"
-                required>
+                id="songSearch"
+                type="text"
+                placeholder="Search songs..."
+            >
+        </div>
 
-            <br>
+        <div class="songs-grid" id="songsGrid">
 
-            <button
-                class="upload-btn"
-                type="submit">
+            {% for song in songs %}
 
-                Upload Lofi Song
+            <div class="song-card" data-song-name="{{ song|lower }}">
 
-            </button>
+                <div class="cover">
+                    🎵
+                </div>
 
-        </form>
+                <h3>{{ song }}</h3>
 
-    </div>
+                <p>
+                    SurMaya Music
+                </p>
 
-</section>
+                <audio controls>
+                    <source
+                        src="{{ url_for('static', filename='songs/' + song) }}"
+                        type="audio/mpeg"
+                    >
+                    Your browser does not support audio.
+                </audio>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="no-results" id="noResults">
+            No song found.
+        </div>
+
+    </section>
 
 
+    <!-- ABOUT -->
 
-<!-- FOOTER -->
+    <section id="about">
+
+        <div class="about-box">
+
+            <img
+                class="about-logo"
+                src="{{ url_for('static', filename='surmaya-logo.png') }}"
+                alt="SurMaya Logo"
+            >
+
+            <h2>SurMaya Music</h2>
+
+            <p>
+                SurMaya Music is a growing music platform focused on
+                soulful sounds, lofi music, fresh voices and original
+                musical experiences.
+
+                <br><br>
+
+                Our vision is simple:
+                <strong>bring music closer to the soul.</strong>
+            </p>
+
+            <div class="ceo">
+                CEO of SurMaya Music — Aayush Raj
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- UPLOAD -->
+
+    <section id="upload">
+
+        <div class="section-title">
+            <small>MUSIC MANAGEMENT</small>
+            <h2>Upload a Song</h2>
+        </div>
+
+        <div class="upload-box">
+
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+
+                <input
+                    type="file"
+                    name="song"
+                    accept="audio/*"
+                    required
+                >
+
+                <button type="submit">
+                    Upload Song
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
 
 <footer>
-
-    <div class="footer-brand">
-        SurMaya Music
-    </div>
-
-    <div>
-        Sounds That Touch Your Soul
-    </div>
-
-    <br>
-
-    © 2026 SurMaya Music • Aayush Raj
-
+    © 2026 <strong>SurMaya Music</strong> — Dil Se Suno.
 </footer>
 
+
+<script>
+
+    function filterSongs(value) {
+
+        value = value.toLowerCase().trim();
+
+        const cards = document.querySelectorAll(".song-card");
+        const noResults = document.getElementById("noResults");
+
+        let found = 0;
+
+        cards.forEach(card => {
+
+            const name = card.getAttribute("data-song-name");
+
+            if (name.includes(value)) {
+                card.style.display = "";
+                found++;
+            } else {
+                card.style.display = "none";
+            }
+
+        });
+
+        if (found === 0 && cards.length > 0) {
+            noResults.style.display = "block";
+        } else {
+            noResults.style.display = "none";
+        }
+    }
+
+
+    document
+        .getElementById("songSearch")
+        .addEventListener("input", function () {
+            filterSongs(this.value);
+        });
+
+
+    document
+        .getElementById("topSearch")
+        .addEventListener("input", function () {
+
+            document
+                .getElementById("songSearch")
+                .value = this.value;
+
+            filterSongs(this.value);
+
+            document
+                .getElementById("music")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+        });
+
+</script>
 
 </body>
 </html>
