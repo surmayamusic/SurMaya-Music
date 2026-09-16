@@ -13,10 +13,10 @@ ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "").strip().lower()
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
 BASE_URL = os.environ.get("BASE_URL", "https://surmaya-music.onrender.com").rstrip("/")
 
-# Use the publishable/anon key for user authentication.
-# Keep the service key only for server-side storage/database operations.
-auth_client = create_client(SUPABASE_URL, SUPABASE_KEY)
-supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+# Public/publishable key is used for user authentication.
+supabase_auth = create_client(SUPABASE_URL, SUPABASE_KEY)
+# Service key is used only for trusted server-side database/storage operations.
+supabase_admin = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 BUCKET_NAME = "songs"
 
 
@@ -46,7 +46,7 @@ def add_google_button(response):
 def home():
     songs = []
     try:
-        files = supabase.storage.from_(BUCKET_NAME).list()
+        files = supabase_admin.storage.from_(BUCKET_NAME).list()
         for file in files:
             name = file.get("name", "")
             if name.lower().endswith((".mp3", ".wav", ".ogg")):
@@ -68,7 +68,7 @@ def signup():
     if not email or not password:
         return redirect(url_for("home", auth_error="Email and password are required", auth_tab="signup"))
     try:
-        response = auth_client.auth.sign_up({"email": email, "password": password})
+        response = supabase_auth.auth.sign_up({"email": email, "password": password})
         if response.user:
             session["user_id"] = str(response.user.id)
             session["user_email"] = email
@@ -92,7 +92,7 @@ def login():
         session["is_admin"] = True
         return redirect(url_for("home"))
     try:
-        response = auth_client.auth.sign_in_with_password({"email": email, "password": password})
+        response = supabase_auth.auth.sign_in_with_password({"email": email, "password": password})
         if response.user:
             session["user_id"] = str(response.user.id)
             session["user_email"] = email
@@ -108,7 +108,7 @@ def login():
 def google_login():
     try:
         redirect_to = f"{BASE_URL}/auth/callback"
-        response = auth_client.auth.sign_in_with_oauth({"provider": "google", "options": {"redirect_to": redirect_to}})
+        response = supabase_auth.auth.sign_in_with_oauth({"provider": "google", "options": {"redirect_to": redirect_to}})
         oauth_url = getattr(response, "url", None)
         if oauth_url:
             return redirect(oauth_url)
@@ -124,7 +124,7 @@ def auth_callback():
     if not code:
         return redirect(url_for("home", auth_error="Google sign in was cancelled or failed."))
     try:
-        response = auth_client.auth.exchange_code_for_session(code)
+        response = supabase_auth.auth.exchange_code_for_session(code)
         user = getattr(response, "user", None)
         if user:
             session["user_id"] = str(user.id)
@@ -148,7 +148,7 @@ def get_favourites():
     if "user_id" not in session or session.get("is_admin"):
         return jsonify([])
     try:
-        result = supabase.table("favourites").select("song_name").eq("user_id", session["user_id"]).execute()
+        result = supabase_admin.table("favourites").select("song_name").eq("user_id", session["user_id"]).execute()
         return jsonify([row["song_name"] for row in result.data])
     except Exception as e:
         print("Favourite load error:", e)
@@ -164,7 +164,7 @@ def add_favourite():
     if not song_name:
         return jsonify({"success": False}), 400
     try:
-        supabase.table("favourites").upsert({"user_id": session["user_id"], "song_name": song_name}).execute()
+        supabase_admin.table("favourites").upsert({"user_id": session["user_id"], "song_name": song_name}).execute()
         return jsonify({"success": True})
     except Exception as e:
         print("Favourite add error:", e)
@@ -178,7 +178,7 @@ def remove_favourite():
     data = request.get_json(silent=True) or {}
     song_name = str(data.get("song_name", "")).strip()
     try:
-        supabase.table("favourites").delete().eq("user_id", session["user_id"]).eq("song_name", song_name).execute()
+        supabase_admin.table("favourites").delete().eq("user_id", session["user_id"]).eq("song_name", song_name).execute()
         return jsonify({"success": True})
     except Exception as e:
         print("Favourite remove error:", e)
@@ -196,7 +196,7 @@ def upload():
     if not filename.lower().endswith((".mp3", ".wav", ".ogg")):
         return "Only MP3, WAV and OGG files are allowed.", 400
     try:
-        supabase.storage.from_(BUCKET_NAME).upload(filename, song.read(), {"content-type": song.content_type or "audio/mpeg"})
+        supabase_admin.storage.from_(BUCKET_NAME).upload(filename, song.read(), {"content-type": song.content_type or "audio/mpeg"})
     except Exception as e:
         print("Upload error:", e)
     return redirect(url_for("home"))
@@ -207,8 +207,8 @@ def delete_song(filename):
     if not admin_required():
         return "Access denied. Admin only.", 403
     try:
-        supabase.storage.from_(BUCKET_NAME).remove([filename])
-        supabase.table("favourites").delete().eq("song_name", filename).execute()
+        supabase_admin.storage.from_(BUCKET_NAME).remove([filename])
+        supabase_admin.table("favourites").delete().eq("song_name", filename).execute()
         return redirect(url_for("home"))
     except Exception as e:
         print("Delete error:", e)
@@ -218,7 +218,7 @@ def delete_song(filename):
 @app.route("/songs/<path:filename>")
 def songs(filename):
     try:
-        return redirect(supabase.storage.from_(BUCKET_NAME).get_public_url(filename))
+        return redirect(supabase_admin.storage.from_(BUCKET_NAME).get_public_url(filename))
     except Exception as e:
         print("Song URL error:", e)
         return "Song not found", 404
@@ -227,7 +227,7 @@ def songs(filename):
 @app.route("/download/<path:filename>")
 def download_song(filename):
     try:
-        data = supabase.storage.from_(BUCKET_NAME).download(filename)
+        data = supabase_admin.storage.from_(BUCKET_NAME).download(filename)
         ext = filename.lower().rsplit(".", 1)[-1]
         mime = {"mp3": "audio/mpeg", "wav": "audio/wav", "ogg": "audio/ogg"}.get(ext, "application/octet-stream")
         return send_file(io.BytesIO(data), as_attachment=True, download_name=os.path.basename(filename), mimetype=mime)
