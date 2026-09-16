@@ -3,11 +3,688 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>SurMaya Music — Dil Se Suno</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,sans-serif;color:#fff;min-height:100vh;background:#070711;overflow-x:hidden}body:before,body:after{content:"";position:fixed;inset:auto;pointer-events:none;border-radius:50%;filter:blur(80px);opacity:.35;z-index:-1}body:before{width:420px;height:420px;left:-120px;top:80px;background:#ff159d}body:after{width:480px;height:480px;right:-160px;top:220px;background:#00c8ff}.cinematic{position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(circle at 50% 0,#6b21a855,transparent 35%),linear-gradient(125deg,#090613,#10102b 45%,#05050b)}
-header{position:sticky;top:0;z-index:20;background:#080812cc;backdrop-filter:blur(20px);border-bottom:1px solid #ffffff18}.nav{width:94%;max-width:1500px;min-height:72px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff;font-weight:800}.brand img{width:48px;height:48px;object-fit:contain;filter:drop-shadow(0 0 14px #ff29b588)}.brand span{font-size:18px}nav{display:flex;gap:16px;align-items:center;flex-wrap:wrap}nav a{color:#d9d9e8;text-decoration:none;font-size:14px}.nav-btn,.primary,.btn,.fav,.delete{cursor:pointer}.nav-btn{border:1px solid #ffffff28;background:#ffffff0b;color:#fff;border-radius:999px;padding:9px 14px}.admin-badge{font-size:10px;padding:5px 9px;border-radius:999px;background:#ffd16626;color:#ffd166}
-.hero{width:92%;max-width:1200px;margin:auto;text-align:center;padding:88px 0 70px;position:relative}.hero:before{content:"";position:absolute;left:50%;top:40px;transform:translateX(-50%);width:430px;height:220px;background:radial-gradient(ellipse,#ff27ad22,transparent 70%);filter:blur(12px);z-index:-1}.hero-logo{width:145px;height:145px;object-fit:contain;filter:drop-shadow(0 0 28px #ff28b966) drop-shadow(0 0 50px #00cfff33)}.kicker{margin-top:20px;color:#d9caff;font-size:12px;letter-spacing:5px;text-transform:uppercase}h1{font-size:clamp(44px,7vw,82px);line-height:1.05;margin-top:12px}.gradient{background:linear-gradient(90deg,#ff36b4,#a86bff,#24d9ff,#ffd166,#ff36b4);background-size:250% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s linear infinite}@keyframes shine{to{background-position:250% center}}.hero p{max-width:680px;margin:22px auto;color:#bfc1d2;line-height:1.8;font-size:17px}.btn,.primary{display:inline-block;padding:14px 27px;border:0;border-radius:999px;background:linear-gradient(90deg,#ed249e,#7958ff,#13c9ef);color:#fff;text-decoration:none;font-weight:800;box-shadow:0 10px 35px #7d36ff33}.btn:hover,.primary:hover{filter:brightness(1.12);transform:translateY(-1px)}
-.section{width:96%;max-width:1500px;margin:auto;padding:38px 0 70px}.section h2{font-size:30px}.section-sub{color:#aeb2c7;font-size:14px;margin-top:6px}.search-wrap{width:min(700px,94%);margin:28px auto}.search{width:100%;padding:15px 20px;border-radius:999px;border:1px solid #ffffff24;background:#ffffff0b;color:#fff;outline:none;box-shadow:inset 0 0 30px #0004}.song-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}.song-card{min-width:0;padding:11px;border-radius:20px;background:linear-gradient(145deg,#ffffff17,#ffffff06);border:1px solid #ffffff1c;box-shadow:0 18px 45px #0005;backdrop-filter:blur(14px);transition:.25s}.song-card:hover{transform:translateY(-5px);border-color:#ff39b955;box-shadow:0 22px 55px #0007,0 0 25px #ff39b51a}.cover{width:100%;height:160px;border-radius:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 15% 20%,#ff2ba6,transparent 32%),radial-gradient(circle at 85% 25%,#19d7ff,transparent 35%),radial-gradient(circle at 55% 90%,#8060ff,transparent 40%),#10101d}.cover img{width:72%;height:72%;object-fit:contain;filter:drop-shadow(0 0 18px #fff3)}.song-title{font-size:14px;font-weight:800;margin:11px 2px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.artist{color:#aeb3c7;font-size:11px;margin:0 2px 9px}audio{width:100%;height:34px}.actions{display:flex;gap:6px;margin-top:7px}.fav,.delete{flex:1;border:1px solid #ffffff1f;border-radius:9px;padding:8px;background:#ffffff0d;color:#fff;font-size:12px}.fav.active{background:#ff37a038;border-color:#ff37a073}.delete{background:#ff3c461f}.download{display:block;text-align:center;text-decoration:none;margin-top:7px;padding:8px;border-radius:9px;background:linear-gradient(90deg,#ffffff0c,#ffffff16);border:1px solid #ffffff1f;color:#fff;font-size:12px}.panel,.about,.upload{width:94%;max-width:700px;margin:10px auto 70px;padding:32px;border-radius:26px;background:linear-gradient(145deg,#ffffff13,#ffffff06);border:1px solid #ffffff1c;box-shadow:0 20px 60px #0006;backdrop-filter:blur(18px)}.panel h2{margin-bottom:8px}.panel p,.upload-text{color:#aeb3c7;font-size:14px;margin-bottom:18px}.form{display:flex;flex-direction:column;gap:12px}.form input{width:100%;padding:13px 15px;border-radius:12px;border:1px solid #ffffff24;background:#ffffff0a;color:#fff;outline:none}.form input:focus,.search:focus{border-color:#9c69ff;box-shadow:0 0 0 3px #9c69ff1c}.form button{align-self:flex-start}.auth-tabs{display:flex;gap:8px;margin:15px 0}.tab{flex:1;padding:10px;border:1px solid #ffffff22;border-radius:10px;background:#ffffff0b;color:#fff;cursor:pointer}.tab.active{background:linear-gradient(90deg,#ed2d9f,#6958ff)}.auth-form.hidden{display:none}.error{background:#ff3c4622;border:1px solid #ff3c4655;padding:10px;border-radius:10px;margin-bottom:15px;color:#ffd5d5}.about{text-align:center;max-width:950px}.about img{width:95px;height:95px;object-fit:contain;filter:drop-shadow(0 0 18px #ff3db966)}.about p{color:#bfc3d2;line-height:1.8;margin-top:10px}.upload input{width:100%;margin:20px 0;color:#bbb}.upload button{border:0;color:#fff;padding:12px 22px;border-radius:999px;background:linear-gradient(90deg,#ed2d9f,#6958ff);font-weight:bold}footer{border-top:1px solid #ffffff17;text-align:center;padding:28px;color:#8f95aa;font-size:13px}.no-results{display:none;text-align:center;color:#aeb3c7;padding:40px}@media(max-width:1100px){.song-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:600px){.nav{min-height:62px}.brand img{width:40px;height:40px}.brand span{font-size:15px}nav{gap:7px}nav a{font-size:10px}.hero{padding-top:55px}.hero-logo{width:105px;height:105px}.song-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.song-card{padding:7px}.cover{height:105px}.song-title{font-size:10px}.artist{font-size:8px}.fav,.delete,.download{font-size:9px;padding:6px 3px}}
+<style
+ /* ═══════════════════════════════════════
+   SURMAYA MUSIC — PREMIUM LUXURY THEME
+   White • Gold • Multicolor • Cinematic
+═══════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #21182d;
+  min-height: 100vh;
+  background: #fffaf2;
+  overflow-x: hidden;
+}
+
+/* Ambient multicolor light */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.25;
+  z-index: -1;
+}
+
+body::before {
+  width: 430px;
+  height: 430px;
+  left: -160px;
+  top: 80px;
+  background: #ff55b4;
+}
+
+body::after {
+  width: 470px;
+  height: 470px;
+  right: -170px;
+  top: 250px;
+  background: #45dfff;
+}
+
+.cinematic {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      #f1c75a55,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      #c6a5ff22,
+      transparent 40%
+    ),
+    linear-gradient(
+      125deg,
+      #fffaf2,
+      #ffffff 48%,
+      #f7f0ff
+    );
+}
+
+/* ═══════════════════════════════════════
+   HEADER & NAVIGATION
+═══════════════════════════════════════ */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #fffffff0;
+  backdrop-filter: blur(22px);
+  border-bottom: 1px solid #c9a45b55;
+}
+
+.nav {
+  width: 94%;
+  max-width: 1500px;
+  min-height: 76px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: #21182d;
+  font-weight: 800;
+}
+
+.brand img {
+  width: 49px;
+  height: 49px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 14px #d7a43b66);
+}
+
+.brand span {
+  font-size: 18px;
+  letter-spacing: -0.3px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #49394f;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: #b47c18;
+}
+
+.nav-btn {
+  cursor: pointer;
+  padding: 9px 15px;
+  border-radius: 999px;
+  border: 1px solid #b58a3c66;
+  background: #ffffff;
+  color: #50391c;
+  font-weight: 600;
+}
+
+.nav-btn:hover {
+  background: #fff1cf;
+}
+
+.admin-badge {
+  font-size: 10px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #f4c95d44;
+  color: #93630b;
+  font-weight: bold;
+}
+
+/* ═══════════════════════════════════════
+   HERO SECTION
+═══════════════════════════════════════ */
+
+.hero {
+  width: 92%;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  padding: 88px 0 75px;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 250px;
+  background: radial-gradient(
+    ellipse,
+    #e6b74d55,
+    transparent 70%
+  );
+  filter: blur(15px);
+  z-index: -1;
+}
+
+.hero-logo {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 20px #d7a43b55)
+    drop-shadow(0 0 40px #ff6ec733);
+}
+
+.kicker {
+  margin-top: 20px;
+  color: #a17b36;
+  font-size: 12px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(44px, 7vw, 82px);
+  line-height: 1.05;
+  margin-top: 12px;
+  letter-spacing: -2px;
+}
+
+.gradient {
+  background: linear-gradient(
+    90deg,
+    #b47718,
+    #ed4ca8,
+    #8061e9,
+    #08b9d9,
+    #b47718
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 7s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 250% center;
+  }
+}
+
+.hero p {
+  max-width: 680px;
+  margin: 22px auto;
+  color: #75697f;
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+.btn,
+.primary {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #d59b32,
+    #e94ba6,
+    #7463e8
+  );
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 12px 35px #b4771830;
+  transition: 0.25s;
+}
+
+.btn:hover,
+.primary:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+  box-shadow: 0 15px 40px #b4771845;
+}
+
+/* ═══════════════════════════════════════
+   GENERAL SECTIONS
+═══════════════════════════════════════ */
+
+.section {
+  width: 96%;
+  max-width: 1500px;
+  margin: auto;
+  padding: 38px 0 70px;
+}
+
+.section h2 {
+  font-size: 30px;
+  color: #261c32;
+  letter-spacing: -0.5px;
+}
+
+.section-sub {
+  color: #8c8095;
+  font-size: 14px;
+  margin-top: 7px;
+}
+
+/* ═══════════════════════════════════════
+   SEARCH
+═══════════════════════════════════════ */
+
+.search-wrap {
+  width: min(700px, 94%);
+  margin: 28px auto;
+}
+
+.search {
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 999px;
+  border: 1px solid #cbb77d88;
+  background: #ffffffdd;
+  color: #33263f;
+  outline: none;
+  font-size: 14px;
+  box-shadow: 0 5px 25px #8d6c3210;
+  transition: 0.2s;
+}
+
+.search::placeholder {
+  color: #a79aac;
+}
+
+.search:focus {
+  border-color: #b98a36;
+  box-shadow: 0 0 0 4px #d7ad4b22;
+}
+
+/* ═══════════════════════════════════════
+   MUSIC CARDS
+═══════════════════════════════════════ */
+
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.song-card {
+  min-width: 0;
+  padding: 11px;
+  border-radius: 20px;
+  background: linear-gradient(
+    145deg,
+    #ffffffef,
+    #fff8ec
+  );
+  border: 1px solid #d9bd7b66;
+  box-shadow: 0 18px 45px #8d6c3215;
+  transition: 0.25s;
+}
+
+.song-card:hover {
+  transform: translateY(-6px);
+  border-color: #d9a33d;
+  box-shadow:
+    0 22px 55px #8d6c3225,
+    0 0 25px #e5b54b18;
+}
+
+/* Colorful album cover */
+.cover {
+  width: 100%;
+  height: 160px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      #ff8dc9,
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 25%,
+      #68e6ff,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 55% 90%,
+      #b2a0ff,
+      transparent 40%
+    ),
+    #fff0cb;
+}
+
+.cover img {
+  width: 72%;
+  height: 72%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px #ffffff);
+}
+
+.song-title {
+  font-size: 14px;
+  font-weight: 800;
+  margin: 11px 2px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #2b2036;
+}
+
+.artist {
+  color: #96899f;
+  font-size: 11px;
+  margin: 0 2px 9px;
+}
+
+audio {
+  width: 100%;
+  height: 34px;
+}
+
+/* ═══════════════════════════════════════
+   ACTION BUTTONS
+═══════════════════════════════════════ */
+
+.actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 7px;
+}
+
+.fav,
+.delete {
+  flex: 1;
+  border: 1px solid #cbb77d66;
+  border-radius: 9px;
+  padding: 8px;
+  background: #fff8e8;
+  color: #5c4522;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.fav:hover {
+  background: #ffe4f2;
+  border-color: #e85ca1;
+}
+
+.fav.active {
+  background: #ff72b533;
+  border-color: #e85ca1;
+  color: #a32365;
+}
+
+.delete {
+  background: #ff3c4615;
+  color: #a5262e;
+}
+
+.delete:hover {
+  background: #ff3c4628;
+}
+
+.download {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 7px;
+  padding: 8px;
+  border-radius: 9px;
+  background: linear-gradient(
+    90deg,
+    #f5e6c5,
+    #f4dff0
+  );
+  border: 1px solid #d6b66b55;
+  color: #55402d;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.download:hover {
+  background: linear-gradient(
+    90deg,
+    #f2d69b,
+    #f2c8e4
+  );
+}
+
+/* ═══════════════════════════════════════
+   PANELS / ABOUT / UPLOAD
+═══════════════════════════════════════ */
+
+.panel,
+.about,
+.upload {
+  width: 94%;
+  max-width: 950px;
+  margin: 10px auto 70px;
+  padding: 32px;
+  border-radius: 26px;
+  background: #ffffffd9;
+  border: 1px solid #d9bd7b66;
+  box-shadow: 0 20px 60px #8d6c3215;
+  backdrop-filter: blur(18px);
+}
+
+.about {
+  text-align: center;
+}
+
+.about img {
+  width: 95px;
+  height: 95px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px #d7a43b55);
+}
+
+.about h2 {
+  margin-top: 10px;
+  color: #2b2036;
+}
+
+.about p {
+  color: #776b83;
+  line-height: 1.8;
+  margin-top: 10px;
+}
+
+.upload h2 {
+  color: #2b2036;
+}
+
+.upload-text {
+  color: #96899f;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.upload input {
+  width: 100%;
+  margin: 20px 0;
+  color: #777;
+}
+
+.upload button {
+  border: 0;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #d59b32,
+    #e94ba6,
+    #7463e8
+  );
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.upload button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+
+footer {
+  border-top: 1px solid #d9bd7b55;
+  text-align: center;
+  padding: 28px;
+  color: #95899f;
+  font-size: 13px;
+  background: #ffffff66;
+}
+
+.no-results {
+  display: none;
+  text-align: center;
+  color: #95899f;
+  padding: 40px;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE DESIGN
+═══════════════════════════════════════ */
+
+@media (max-width: 1100px) {
+  .song-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 750px) {
+  .song-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero {
+    padding-top: 65px;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    min-height: 62px;
+  }
+
+  .brand img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand span {
+    font-size: 15px;
+  }
+
+  nav {
+    gap: 8px;
+  }
+
+  nav a {
+    font-size: 10px;
+  }
+
+  .hero {
+    padding-top: 55px;
+  }
+
+  .hero-logo {
+    width: 105px;
+    height: 105px;
+  }
+
+  .kicker {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  h1 {
+    font-size: 42px;
+    letter-spacing: -1px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .song-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .song-card {
+    padding: 7px;
+    border-radius: 15px;
+  }
+
+  .cover {
+    height: 105px;
+  }
+
+  .song-title {
+    font-size: 10px;
+  }
+
+  .artist {
+    font-size: 8px;
+  }
+
+  .fav,
+  .delete,
+  .download {
+    font-size: 9px;
+    padding: 6px 3px;
+  }
+
+  .panel,
+  .about,
+  .upload {
+    padding: 23px 18px;
+  }
 </style></head>
 <body><div class="cinematic"></div>
 <header><div class="nav"><a href="#home" class="brand"><img src="{{ url_for('logo') }}" alt="SurMaya Music"><span>SurMaya Music</span></a><nav><a href="#home">Home</a><a href="#music">Music</a><a href="#about">About</a>{% if user and not user.is_admin %}<a href="#favourites">❤️ Favourites</a>{% endif %}{% if user %}<button class="nav-btn" onclick="logoutUser()">Logout</button>{% else %}<a href="#account">Sign In</a>{% endif %}{% if user and user.is_admin %}<span class="admin-badge">ADMIN</span>{% endif %}</nav></div></header>
