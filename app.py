@@ -10,6 +10,7 @@ SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "").strip().lower()
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
+BASE_URL = os.environ.get("BASE_URL", "https://surmaya-music.onrender.com").rstrip("/")
 
 supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 BUCKET_NAME = "songs"
@@ -18,11 +19,7 @@ BUCKET_NAME = "songs"
 def current_user():
     if "user_id" not in session:
         return None
-    return {
-        "id": session.get("user_id"),
-        "email": session.get("user_email"),
-        "is_admin": session.get("is_admin", False)
-    }
+    return {"id": session.get("user_id"), "email": session.get("user_email"), "is_admin": session.get("is_admin", False)}
 
 
 def admin_required():
@@ -43,8 +40,6 @@ def home():
     return render_template("index.html", songs=songs, user=current_user())
 
 
-# The logo is stored in the repository root. This route serves it without
-# requiring the user to move the PNG into the static folder.
 @app.route("/logo")
 def logo():
     return send_file("surmaya-logo.png", mimetype="image/png", max_age=3600)
@@ -75,13 +70,11 @@ def login():
     password = request.form.get("password", "")
     if not email or not password:
         return redirect(url_for("home", auth_error="Email and password are required"))
-
     if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
         session["user_id"] = "admin"
         session["user_email"] = email
         session["is_admin"] = True
         return redirect(url_for("home"))
-
     try:
         response = supabase.auth.sign_in_with_password({"email": email, "password": password})
         if response.user:
@@ -93,6 +86,42 @@ def login():
     except Exception as e:
         print("Login error:", e)
         return redirect(url_for("home", auth_error="Invalid email or password"))
+
+
+@app.route("/auth/google")
+def google_login():
+    try:
+        redirect_to = f"{BASE_URL}/auth/callback"
+        response = supabase.auth.sign_in_with_oauth({
+            "provider": "google",
+            "options": {"redirect_to": redirect_to}
+        })
+        oauth_url = getattr(response, "url", None)
+        if oauth_url:
+            return redirect(oauth_url)
+        return redirect(url_for("home", auth_error="Google sign in is not configured yet."))
+    except Exception as e:
+        print("Google OAuth error:", e)
+        return redirect(url_for("home", auth_error="Google sign in is not configured yet."))
+
+
+@app.route("/auth/callback")
+def auth_callback():
+    code = request.args.get("code")
+    if not code:
+        return redirect(url_for("home", auth_error="Google sign in was cancelled or failed."))
+    try:
+        response = supabase.auth.exchange_code_for_session(code)
+        user = getattr(response, "user", None)
+        if user:
+            session["user_id"] = str(user.id)
+            session["user_email"] = user.email or ""
+            session["is_admin"] = False
+            return redirect(url_for("home"))
+        return redirect(url_for("home", auth_error="Google sign in could not be completed."))
+    except Exception as e:
+        print("OAuth callback error:", e)
+        return redirect(url_for("home", auth_error="Google sign in could not be completed."))
 
 
 @app.route("/logout")
