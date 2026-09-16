@@ -26,6 +26,18 @@ def admin_required():
     return "user_id" in session and session.get("is_admin") is True
 
 
+@app.after_request
+def add_google_button(response):
+    if response.content_type and "text/html" in response.content_type and not current_user():
+        body = response.get_data(as_text=True)
+        marker = '<div class="auth-tabs">'
+        button = '<a href="/auth/google" class="google-btn">🔵 Continue with Google</a>'
+        if marker in body and "Continue with Google" not in body:
+            body = body.replace(marker, button + marker, 1)
+            response.set_data(body)
+    return response
+
+
 @app.route("/")
 def home():
     songs = []
