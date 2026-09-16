@@ -7,11 +7,15 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "change-this-secret")
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 SUPABASE_SERVICE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "").strip().lower()
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
 BASE_URL = os.environ.get("BASE_URL", "https://surmaya-music.onrender.com").rstrip("/")
 
+# Use the publishable/anon key for user authentication.
+# Keep the service key only for server-side storage/database operations.
+auth_client = create_client(SUPABASE_URL, SUPABASE_KEY)
 supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 BUCKET_NAME = "songs"
 
@@ -64,7 +68,7 @@ def signup():
     if not email or not password:
         return redirect(url_for("home", auth_error="Email and password are required", auth_tab="signup"))
     try:
-        response = supabase.auth.sign_up({"email": email, "password": password})
+        response = auth_client.auth.sign_up({"email": email, "password": password})
         if response.user:
             session["user_id"] = str(response.user.id)
             session["user_email"] = email
@@ -88,7 +92,7 @@ def login():
         session["is_admin"] = True
         return redirect(url_for("home"))
     try:
-        response = supabase.auth.sign_in_with_password({"email": email, "password": password})
+        response = auth_client.auth.sign_in_with_password({"email": email, "password": password})
         if response.user:
             session["user_id"] = str(response.user.id)
             session["user_email"] = email
@@ -104,7 +108,7 @@ def login():
 def google_login():
     try:
         redirect_to = f"{BASE_URL}/auth/callback"
-        response = supabase.auth.sign_in_with_oauth({"provider": "google", "options": {"redirect_to": redirect_to}})
+        response = auth_client.auth.sign_in_with_oauth({"provider": "google", "options": {"redirect_to": redirect_to}})
         oauth_url = getattr(response, "url", None)
         if oauth_url:
             return redirect(oauth_url)
@@ -120,7 +124,7 @@ def auth_callback():
     if not code:
         return redirect(url_for("home", auth_error="Google sign in was cancelled or failed."))
     try:
-        response = supabase.auth.exchange_code_for_session(code)
+        response = auth_client.auth.exchange_code_for_session(code)
         user = getattr(response, "user", None)
         if user:
             session["user_id"] = str(user.id)
