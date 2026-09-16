@@ -5,6 +5,11 @@ import io
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "change-this-secret")
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="Lax",
+    SESSION_COOKIE_SECURE=True,
+)
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
@@ -35,10 +40,27 @@ def add_google_button(response):
     if response.content_type and "text/html" in response.content_type and not current_user():
         body = response.get_data(as_text=True)
         marker = '<div class="auth-tabs">'
-        button = '<a href="/auth/google" style="display:block;text-align:center;text-decoration:none;margin:0 0 12px;padding:12px;border-radius:12px;background:#fff;color:#111;border:1px solid #ddd;font-weight:bold;box-shadow:0 3px 10px #0003">🔵 Continue with Google</a>'
+        button = '''<div class="google-wrap"><div class="or-line"><span>OR</span></div><a class="google-btn" href="/auth/google"><span class="google-g">G</span><span>Continue with Google</span></a></div>'''
+        cinematic_css = '''<style id="surmaya-cinematic-overrides">
+:root{--sm-bg:#05040b;--sm-card:rgba(17,15,29,.72);--sm-line:rgba(255,255,255,.14);--sm-muted:#a9a8b8}
+html{background:#05040b}body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(900px 500px at 8% 12%,rgba(255,35,160,.16),transparent 55%),radial-gradient(800px 520px at 92% 18%,rgba(0,205,255,.14),transparent 55%),radial-gradient(700px 600px at 52% 88%,rgba(125,70,255,.13),transparent 58%),#05040b!important;color:#f7f4ff}
+body:after{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:linear-gradient(120deg,rgba(255,0,153,.055),transparent 30%,rgba(0,229,255,.045) 68%,rgba(255,191,0,.045));mix-blend-mode:screen}
+.cinematic{background:radial-gradient(ellipse at 50% -8%,rgba(255,47,178,.22),transparent 34%),radial-gradient(circle at 15% 48%,rgba(0,215,255,.11),transparent 27%),radial-gradient(circle at 85% 62%,rgba(255,190,50,.09),transparent 25%),linear-gradient(135deg,#04030a 0%,#0b0716 42%,#05050c 100%)!important}
+header{background:rgba(6,5,13,.78)!important;border-bottom:1px solid rgba(255,255,255,.10)!important;box-shadow:0 10px 45px rgba(0,0,0,.28)}.brand img{filter:drop-shadow(0 0 12px rgba(255,44,180,.55)) drop-shadow(0 0 22px rgba(0,210,255,.22))}.brand span{letter-spacing:.2px}
+nav a{transition:.2s;color:#d9d6e6}nav a:hover{color:#fff;text-shadow:0 0 18px rgba(255,48,183,.7)}.nav-btn{background:linear-gradient(100deg,rgba(255,40,174,.12),rgba(77,109,255,.12),rgba(0,213,255,.10));border-color:rgba(255,255,255,.18)}
+.hero{padding-top:100px}.hero:after{content:"";position:absolute;left:50%;bottom:25px;transform:translateX(-50%);width:420px;height:2px;background:linear-gradient(90deg,transparent,#ff2cae,#7958ff,#13d8ff,#ffd166,transparent);filter:blur(1px);opacity:.75}.hero-logo{filter:drop-shadow(0 0 20px rgba(255,37,171,.45)) drop-shadow(0 0 38px rgba(0,210,255,.20))}.kicker{color:#f1d8ff;border-color:rgba(255,255,255,.14)!important;background:linear-gradient(100deg,rgba(255,37,174,.10),rgba(106,76,255,.10),rgba(0,205,255,.08))!important}.gradient{background:linear-gradient(90deg,#ff36b4,#ff8a32,#ffd166,#9b65ff,#21d9ff,#ff36b4)!important;background-size:300% auto!important}
+.btn,.primary{background:linear-gradient(100deg,#ff249f 0%,#a74cff 48%,#16cfff 100%)!important;box-shadow:0 14px 42px rgba(139,53,255,.28),0 0 30px rgba(255,32,165,.10)}
+.section{position:relative}.section h2{letter-spacing:-.7px}.song-card{background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.035))!important;border-color:rgba(255,255,255,.14)!important;box-shadow:0 20px 55px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.05)!important}.song-card:hover{border-color:rgba(255,57,181,.55)!important;box-shadow:0 25px 65px rgba(0,0,0,.45),0 0 35px rgba(255,44,174,.12)!important}.cover{background:radial-gradient(circle at 15% 20%,#ff2ba6,transparent 32%),radial-gradient(circle at 85% 25%,#19d7ff,transparent 35%),radial-gradient(circle at 55% 90%,#8060ff,transparent 40%),#10101d!important}.download{background:linear-gradient(100deg,rgba(255,255,255,.06),rgba(121,88,255,.10),rgba(0,207,255,.07))!important}.fav.active{box-shadow:0 0 18px rgba(255,55,181,.18)}
+.panel,.about,.upload{background:linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.035))!important;border-color:rgba(255,255,255,.14)!important;box-shadow:0 24px 70px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.05)!important}.form input,.search{background:rgba(0,0,0,.18)!important}.form input:focus,.search:focus{border-color:#b76aff!important;box-shadow:0 0 0 3px rgba(183,106,255,.13),0 0 25px rgba(255,46,177,.08)!important}.tab.active{background:linear-gradient(100deg,#ff2cae,#7b52ff,#13cfff)!important}.upload button{background:linear-gradient(100deg,#ff2cae,#7b52ff,#13cfff)!important}
+.google-wrap{margin:0 0 15px}.or-line{display:flex;align-items:center;gap:10px;margin:2px 0 12px;color:#858397;font-size:10px;letter-spacing:2px}.or-line:before,.or-line:after{content:"";height:1px;flex:1;background:rgba(255,255,255,.12)}.google-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.96);color:#15131b!important;text-decoration:none;font-weight:800;border:1px solid rgba(255,255,255,.7);box-shadow:0 10px 30px rgba(0,0,0,.22);transition:.2s}.google-btn:hover{transform:translateY(-1px);box-shadow:0 14px 35px rgba(0,0,0,.3)}.google-g{font-size:19px;font-weight:900;background:linear-gradient(45deg,#4285f4 20%,#34a853 42%,#fbbc05 65%,#ea4335 84%);-webkit-background-clip:text;background-clip:text;color:transparent}
+footer{background:#030308!important;border-top:1px solid rgba(255,255,255,.10)!important}
+@media(max-width:600px){.hero{padding-top:70px}.google-btn{font-size:13px}}
+</style>'''
         if marker in body and "Continue with Google" not in body:
             body = body.replace(marker, button + marker, 1)
-            response.set_data(body)
+        if "surmaya-cinematic-overrides" not in body and "</head>" in body:
+            body = body.replace("</head>", cinematic_css + "</head>", 1)
+        response.set_data(body)
     return response
 
 
@@ -101,7 +123,7 @@ def login():
         return redirect(url_for("home", auth_error="Invalid email or password"))
     except Exception as e:
         print("Login error:", e)
-        return redirect(url_for("home", auth_error="Invalid email or password"))
+        return redirect(url_for("home", auth_error="Invalid email or password. Please check your email/password and Supabase Auth settings."))
 
 
 @app.route("/auth/google")
