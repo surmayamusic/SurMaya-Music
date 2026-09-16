@@ -31,7 +31,7 @@ def add_google_button(response):
     if response.content_type and "text/html" in response.content_type and not current_user():
         body = response.get_data(as_text=True)
         marker = '<div class="auth-tabs">'
-        button = '<a href="/auth/google" class="google-btn">🔵 Continue with Google</a>'
+        button = '<a href="/auth/google" style="display:block;text-align:center;text-decoration:none;margin:0 0 12px;padding:12px;border-radius:12px;background:#fff;color:#111;border:1px solid #ddd;font-weight:bold;box-shadow:0 3px 10px #0003">🔵 Continue with Google</a>'
         if marker in body and "Continue with Google" not in body:
             body = body.replace(marker, button + marker, 1)
             response.set_data(body)
@@ -104,10 +104,7 @@ def login():
 def google_login():
     try:
         redirect_to = f"{BASE_URL}/auth/callback"
-        response = supabase.auth.sign_in_with_oauth({
-            "provider": "google",
-            "options": {"redirect_to": redirect_to}
-        })
+        response = supabase.auth.sign_in_with_oauth({"provider": "google", "options": {"redirect_to": redirect_to}})
         oauth_url = getattr(response, "url", None)
         if oauth_url:
             return redirect(oauth_url)
