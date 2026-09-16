@@ -4,13 +4,18 @@ import os
 
 app = Flask(__name__)
 
+# Supabase settings
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY")
+
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 BUCKET_NAME = "songs"
 
 
+# =========================
+# HOME PAGE
+# =========================
 @app.route("/")
 def home():
     songs = []
@@ -30,6 +35,9 @@ def home():
     return render_template("index.html", songs=songs)
 
 
+# =========================
+# UPLOAD SONG
+# =========================
 @app.route("/upload", methods=["POST"])
 def upload():
     song = request.files.get("song")
@@ -56,6 +64,9 @@ def upload():
     return redirect(url_for("home"))
 
 
+# =========================
+# PLAY SONG
+# =========================
 @app.route("/songs/<path:filename>")
 def songs(filename):
     try:
@@ -67,6 +78,9 @@ def songs(filename):
         return "Song not found", 404
 
 
+# =========================
+# RUN APP
+# =========================
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
