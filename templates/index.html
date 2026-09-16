@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SurMaya Music — Dil Se Suno</title>
-<style>
- /* ═══════════════════════════════════════
-   SURMAYA MUSIC — PREMIUM LUXURY THEME
-   White • Gold • Multicolor • Cinematic
-═══════════════════════════════════════ */
 
+<style>
 * {
   box-sizing: border-box;
   margin: 0;
@@ -23,33 +20,35 @@ body {
   font-family: Arial, sans-serif;
   color: #21182d;
   min-height: 100vh;
-  background: #fffaf2;
+  background:
+    radial-gradient(circle at 5% 10%, #ffe0f0, transparent 30%),
+    radial-gradient(circle at 95% 20%, #dffaff, transparent 30%),
+    linear-gradient(135deg, #fffaf2, #ffffff, #f7f0ff);
   overflow-x: hidden;
 }
 
-/* Ambient multicolor light */
 body::before,
 body::after {
   content: "";
   position: fixed;
   pointer-events: none;
   border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.25;
+  filter: blur(110px);
+  opacity: .2;
   z-index: -1;
 }
 
 body::before {
-  width: 430px;
-  height: 430px;
-  left: -160px;
+  width: 420px;
+  height: 420px;
+  left: -180px;
   top: 80px;
   background: #ff55b4;
 }
 
 body::after {
-  width: 470px;
-  height: 470px;
+  width: 450px;
+  height: 450px;
   right: -170px;
   top: 250px;
   background: #45dfff;
@@ -61,35 +60,19 @@ body::after {
   pointer-events: none;
   z-index: -2;
   background:
-    radial-gradient(
-      circle at 50% 0%,
-      #f1c75a55,
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 100% 100%,
-      #c6a5ff22,
-      transparent 40%
-    ),
-    linear-gradient(
-      125deg,
-      #fffaf2,
-      #ffffff 48%,
-      #f7f0ff
-    );
+    radial-gradient(circle at 50% 0%, #f1c75a44, transparent 35%),
+    linear-gradient(125deg, #fffaf2, #fff, #f7f0ff);
 }
 
-/* ═══════════════════════════════════════
-   HEADER & NAVIGATION
-═══════════════════════════════════════ */
+/* HEADER */
 
 header {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: #fffffff0;
-  backdrop-filter: blur(22px);
-  border-bottom: 1px solid #c9a45b55;
+  background: #ffffffee;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #d4af5f66;
 }
 
 .nav {
@@ -121,7 +104,6 @@ header {
 
 .brand span {
   font-size: 18px;
-  letter-spacing: -0.3px;
 }
 
 nav {
@@ -136,7 +118,7 @@ nav a {
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
-  transition: 0.2s;
+  transition: .2s;
 }
 
 nav a:hover {
@@ -148,7 +130,7 @@ nav a:hover {
   padding: 9px 15px;
   border-radius: 999px;
   border: 1px solid #b58a3c66;
-  background: #ffffff;
+  background: white;
   color: #50391c;
   font-weight: 600;
 }
@@ -161,14 +143,12 @@ nav a:hover {
   font-size: 10px;
   padding: 5px 9px;
   border-radius: 999px;
-  background: #f4c95d44;
+  background: #f4c95d55;
   color: #93630b;
   font-weight: bold;
 }
 
-/* ═══════════════════════════════════════
-   HERO SECTION
-═══════════════════════════════════════ */
+/* HERO */
 
 .hero {
   width: 92%;
@@ -176,24 +156,6 @@ nav a:hover {
   margin: auto;
   text-align: center;
   padding: 88px 0 75px;
-  position: relative;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 30px;
-  transform: translateX(-50%);
-  width: 500px;
-  height: 250px;
-  background: radial-gradient(
-    ellipse,
-    #e6b74d55,
-    transparent 70%
-  );
-  filter: blur(15px);
-  z-index: -1;
 }
 
 .hero-logo {
@@ -211,7 +173,7 @@ nav a:hover {
   font-size: 12px;
   letter-spacing: 5px;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: bold;
 }
 
 h1 {
@@ -258,29 +220,28 @@ h1 {
   border: 0;
   border-radius: 999px;
   background: linear-gradient(
-    90deg,
-    #d59b32,
-    #e94ba6,
-    #7463e8
+    100deg,
+    #d4a23c,
+    #ed5ca8,
+    #8270ed,
+    #35cfe2
   );
-  color: #ffffff;
+  background-size: 250% auto;
+  color: white;
   text-decoration: none;
-  font-weight: 800;
+  font-weight: bold;
   cursor: pointer;
   box-shadow: 0 12px 35px #b4771830;
-  transition: 0.25s;
+  transition: .25s;
 }
 
 .btn:hover,
 .primary:hover {
   transform: translateY(-3px);
   filter: brightness(1.08);
-  box-shadow: 0 15px 40px #b4771845;
 }
 
-/* ═══════════════════════════════════════
-   GENERAL SECTIONS
-═══════════════════════════════════════ */
+/* SECTIONS */
 
 .section {
   width: 96%;
@@ -292,7 +253,6 @@ h1 {
 .section h2 {
   font-size: 30px;
   color: #261c32;
-  letter-spacing: -0.5px;
 }
 
 .section-sub {
@@ -301,9 +261,7 @@ h1 {
   margin-top: 7px;
 }
 
-/* ═══════════════════════════════════════
-   SEARCH
-═══════════════════════════════════════ */
+/* SEARCH */
 
 .search-wrap {
   width: min(700px, 94%);
@@ -319,12 +277,6 @@ h1 {
   color: #33263f;
   outline: none;
   font-size: 14px;
-  box-shadow: 0 5px 25px #8d6c3210;
-  transition: 0.2s;
-}
-
-.search::placeholder {
-  color: #a79aac;
 }
 
 .search:focus {
@@ -332,9 +284,7 @@ h1 {
   box-shadow: 0 0 0 4px #d7ad4b22;
 }
 
-/* ═══════════════════════════════════════
-   MUSIC CARDS
-═══════════════════════════════════════ */
+/* MUSIC GRID */
 
 .song-grid {
   display: grid;
@@ -346,25 +296,17 @@ h1 {
   min-width: 0;
   padding: 11px;
   border-radius: 20px;
-  background: linear-gradient(
-    145deg,
-    #ffffffef,
-    #fff8ec
-  );
+  background: linear-gradient(145deg, #ffffffef, #fff8ec);
   border: 1px solid #d9bd7b66;
   box-shadow: 0 18px 45px #8d6c3215;
-  transition: 0.25s;
+  transition: .25s;
 }
 
 .song-card:hover {
   transform: translateY(-6px);
   border-color: #d9a33d;
-  box-shadow:
-    0 22px 55px #8d6c3225,
-    0 0 25px #e5b54b18;
 }
 
-/* Colorful album cover */
 .cover {
   width: 100%;
   height: 160px;
@@ -374,21 +316,9 @@ h1 {
   justify-content: center;
   overflow: hidden;
   background:
-    radial-gradient(
-      circle at 15% 20%,
-      #ff8dc9,
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 85% 25%,
-      #68e6ff,
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 55% 90%,
-      #b2a0ff,
-      transparent 40%
-    ),
+    radial-gradient(circle at 15% 20%, #ff8dc9, transparent 32%),
+    radial-gradient(circle at 85% 25%, #68e6ff, transparent 35%),
+    radial-gradient(circle at 55% 90%, #b2a0ff, transparent 40%),
     #fff0cb;
 }
 
@@ -396,12 +326,12 @@ h1 {
   width: 72%;
   height: 72%;
   object-fit: contain;
-  filter: drop-shadow(0 0 18px #ffffff);
+  filter: drop-shadow(0 0 18px white);
 }
 
 .song-title {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: bold;
   margin: 11px 2px 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -420,9 +350,7 @@ audio {
   height: 34px;
 }
 
-/* ═══════════════════════════════════════
-   ACTION BUTTONS
-═══════════════════════════════════════ */
+/* BUTTONS */
 
 .actions {
   display: flex;
@@ -440,7 +368,6 @@ audio {
   color: #5c4522;
   font-size: 12px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .fav:hover {
@@ -459,10 +386,6 @@ audio {
   color: #a5262e;
 }
 
-.delete:hover {
-  background: #ff3c4628;
-}
-
 .download {
   display: block;
   text-align: center;
@@ -470,28 +393,13 @@ audio {
   margin-top: 7px;
   padding: 8px;
   border-radius: 9px;
-  background: linear-gradient(
-    90deg,
-    #f5e6c5,
-    #f4dff0
-  );
+  background: linear-gradient(90deg, #f5e6c5, #f4dff0);
   border: 1px solid #d6b66b55;
   color: #55402d;
   font-size: 12px;
-  transition: 0.2s;
 }
 
-.download:hover {
-  background: linear-gradient(
-    90deg,
-    #f2d69b,
-    #f2c8e4
-  );
-}
-
-/* ═══════════════════════════════════════
-   PANELS / ABOUT / UPLOAD
-═══════════════════════════════════════ */
+/* PANELS */
 
 .panel,
 .about,
@@ -518,19 +426,16 @@ audio {
   filter: drop-shadow(0 0 18px #d7a43b55);
 }
 
-.about h2 {
-  margin-top: 10px;
+.about h2,
+.upload h2 {
   color: #2b2036;
+  margin-top: 10px;
 }
 
 .about p {
   color: #776b83;
   line-height: 1.8;
   margin-top: 10px;
-}
-
-.upload h2 {
-  color: #2b2036;
 }
 
 .upload-text {
@@ -547,28 +452,69 @@ audio {
 
 .upload button {
   border: 0;
-  color: #fff;
+  color: white;
   padding: 12px 22px;
   border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    #d59b32,
-    #e94ba6,
-    #7463e8
-  );
+  background: linear-gradient(90deg, #d59b32, #e94ba6, #7463e8);
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.upload button:hover {
-  filter: brightness(1.08);
-  transform: translateY(-2px);
+/* AUTH */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 22px;
 }
 
-/* ═══════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════ */
+.form input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d9bd7b88;
+  border-radius: 12px;
+  background: #fffdf8;
+  color: #21182d;
+  outline: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #d9bd7b88;
+  border-radius: 999px;
+  background: #fff8e8;
+  color: #5c4522;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.tab.active {
+  background: linear-gradient(90deg, #d4a23c, #ed5ca8);
+  color: white;
+}
+
+.error {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #ffe5e5;
+  color: #a5262e;
+  font-size: 14px;
+}
+
+/* FOOTER */
 
 footer {
   border-top: 1px solid #d9bd7b55;
@@ -586,9 +532,7 @@ footer {
   padding: 40px;
 }
 
-/* ═══════════════════════════════════════
-   RESPONSIVE DESIGN
-═══════════════════════════════════════ */
+/* RESPONSIVE */
 
 @media (max-width: 1100px) {
   .song-grid {
@@ -599,10 +543,6 @@ footer {
 @media (max-width: 750px) {
   .song-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .hero {
-    padding-top: 65px;
   }
 }
 
@@ -685,12 +625,464 @@ footer {
   .upload {
     padding: 23px 18px;
   }
-</style></head>
-<body><div class="cinematic"></div>
-<header><div class="nav"><a href="#home" class="brand"><img src="{{ url_for('logo') }}" alt="SurMaya Music"><span>SurMaya Music</span></a><nav><a href="#home">Home</a><a href="#music">Music</a><a href="#about">About</a>{% if user and not user.is_admin %}<a href="#favourites">❤️ Favourites</a>{% endif %}{% if user %}<button class="nav-btn" onclick="logoutUser()">Logout</button>{% else %}<a href="#account">Sign In</a>{% endif %}{% if user and user.is_admin %}<span class="admin-badge">ADMIN</span>{% endif %}</nav></div></header>
-<main id="home"><section class="hero"><img class="hero-logo" src="{{ url_for('logo') }}" alt="SurMaya Music"><div class="kicker">SurMaya Music • Dil Se Suno</div><h1>Listen. <span class="gradient">Feel. Repeat.</span></h1><p>Original sounds, fresh voices and cinematic music — made to be heard <b>Dil Se</b>.</p><a href="#music" class="btn">Explore Music</a></section>
-<section class="section" id="music"><h2>Latest Music</h2><div class="section-sub">Discover the SurMaya sound.</div><div class="search-wrap"><input id="songSearch" class="search" type="search" placeholder="Search your favourite song..."></div><div class="song-grid" id="songGrid">{% for song in songs %}<article class="song-card" data-song="{{ song|lower }}"><div class="cover"><img src="{{ url_for('logo') }}" alt="SurMaya"></div><div class="song-title" title="{{ song }}">{{ song }}</div><div class="artist">SurMaya Music</div><audio controls preload="none"><source src="{{ url_for('songs', filename=song) }}"></audio><a class="download" href="{{ url_for('download_song', filename=song) }}">⬇ Download</a>{% if user and not user.is_admin %}<div class="actions"><button class="fav" data-song="{{ song }}" onclick="toggleFavourite(this)">♡ Favourite</button></div>{% endif %}{% if user and user.is_admin %}<div class="actions"><form method="POST" action="{{ url_for('delete_song', filename=song) }}" style="width:100%" onsubmit="return confirm('Delete this song?')"><button class="delete" type="submit" style="width:100%">🗑️ Delete</button></form></div>{% endif %}</article>{% endfor %}</div><div id="noResults" class="no-results">No matching song found.</div></section>
-{% if user and not user.is_admin %}<section class="section" id="favourites"><h2>❤️ My Favourites</h2><div class="section-sub">Your saved SurMaya songs.</div><div class="song-grid" id="favGrid"></div><div id="noFav" class="no-results">You haven't added any favourites yet.</div></section>{% endif %}
-{% if not user %}<section class="panel" id="account"><h2>👤 Join SurMaya Music</h2><p>Sign in to save favourites, or create your free account.</p>{% if request.args.get('auth_error') %}<div class="error">{{ request.args.get('auth_error') }}</div>{% endif %}<div class="auth-tabs"><button id="loginTab" class="tab active" onclick="showAuth('login')">Sign In</button><button id="signupTab" class="tab" onclick="showAuth('signup')">Create Account</button></div><form id="loginForm" class="form auth-form" method="POST" action="{{ url_for('login') }}"><input type="email" name="email" placeholder="Email" required><input type="password" name="password" placeholder="Password" required><button class="primary" type="submit">Sign In</button></form><form id="signupForm" class="form auth-form hidden" method="POST" action="{{ url_for('signup') }}"><input type="email" name="email" placeholder="Email" required><input type="password" name="password" minlength="6" placeholder="Password (6+ characters)" required><button class="primary" type="submit">Create Account</button></form></section>{% endif %}
-<section class="about" id="about"><img src="{{ url_for('logo') }}" alt="SurMaya Music"><h2>SurMaya Music</h2><p><b>Dil Se Suno.</b> SurMaya Music is a growing music platform focused on sound, emotion and new creative voices.</p><p>CEO of SurMaya Music — <b>Aayush Raj</b></p></section>{% if user and user.is_admin %}<section class="upload"><h2>👑 Admin — Upload Music</h2><div class="upload-text">Only the admin account can add new tracks.</div><form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data"><input type="file" name="song" accept=".mp3,.wav,.ogg" required><button type="submit">Upload Song</button></form></section>{% endif %}</main><footer>© 2026 SurMaya Music • Dil Se Suno</footer>
-<script>const search=document.getElementById('songSearch'),cards=[...document.querySelectorAll('.song-card')],noResults=document.getElementById('noResults');if(search){search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();let n=0;cards.forEach(c=>{const ok=c.dataset.song.includes(q);c.style.display=ok?'':'none';if(ok)n++});noResults.style.display=n?'none':'block'})}function showAuth(type){const login=document.getElementById('loginForm'),signup=document.getElementById('signupForm'),lt=document.getElementById('loginTab'),st=document.getElementById('signupTab');if(type==='signup'){login.classList.add('hidden');signup.classList.remove('hidden');lt.classList.remove('active');st.classList.add('active')}else{signup.classList.add('hidden');login.classList.remove('hidden');st.classList.remove('active');lt.classList.add('active')}}const initialTab='{{ request.args.get("auth_tab", "login") }}';if(initialTab==='signup')showAuth('signup');function logoutUser(){window.location.href='{{ url_for("logout") }}'}async function toggleFavourite(button){const song=button.dataset.song,active=button.classList.contains('active'),endpoint=active?'/api/favourite/remove':'/api/favourite';try{const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({song_name:song})});if(!r.ok){alert('Please sign in first.');return}button.classList.toggle('active');button.textContent=button.classList.contains('active')?'♥ Favourite':'♡ Favourite';loadFavourites()}catch(e){alert('Something went wrong.')}}async function loadFavourites(){const grid=document.getElementById('favGrid');if(!grid)return;try{const r=await fetch('/api/favourites'),names=await r.json(),set=new Set(names.map(x=>x.toLowerCase()));cards.forEach(c=>{const b=c.querySelector('.fav');if(b){const on=set.has(b.dataset.song.toLowerCase());b.classList.toggle('active',on);b.textContent=on?'♥ Favourite':'♡ Favourite'}});grid.innerHTML='';names.forEach(name=>{const o=cards.find(c=>c.dataset.song===name.toLowerCase());if(o){const c=o.cloneNode(true),b=c.querySelector('.fav');if(b){b.classList.add('active');b.textContent='♥ Favourite'}grid.appendChild(c)}});const nf=document.getElementById('noFav');if(nf)nf.style.display=names.length?'none':'block'}catch(e){console.log(e)}}{% if user and not user.is_admin %}loadFavourites();{% endif %}</script></body></html>
+}
+</style>
+</head>
+
+<body>
+<div class="cinematic"></div>
+
+<header>
+<div class="nav">
+
+<a href="#home" class="brand">
+<img src="{{ url_for('logo') }}" alt="SurMaya Music">
+<span>SurMaya Music</span>
+</a>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#music">Music</a>
+<a href="#about">About</a>
+
+{% if user and not user.is_admin %}
+<a href="#favourites">❤️ Favourites</a>
+{% endif %}
+
+{% if user %}
+<button class="nav-btn" onclick="logoutUser()">Logout</button>
+{% else %}
+<a href="#account">Sign In</a>
+{% endif %}
+
+{% if user and user.is_admin %}
+<span class="admin-badge">ADMIN</span>
+{% endif %}
+
+</nav>
+</div>
+</header>
+
+<main id="home">
+
+<section class="hero">
+<img class="hero-logo" src="{{ url_for('logo') }}" alt="SurMaya Music">
+
+<div class="kicker">SurMaya Music • Dil Se Suno</div>
+
+<h1>Listen. <span class="gradient">Feel. Repeat.</span></h1>
+
+<p>
+Original sounds, fresh voices and cinematic music —
+made to be heard <b>Dil Se</b>.
+</p>
+
+<a href="#music" class="btn">Explore Music</a>
+</section>
+
+<section class="section" id="music">
+
+<h2>Latest Music</h2>
+<div class="section-sub">Discover the SurMaya sound.</div>
+
+<div class="search-wrap">
+<input id="songSearch" class="search" type="search"
+placeholder="Search your favourite song...">
+</div>
+
+<div class="song-grid" id="songGrid">
+
+{% for song in songs %}
+
+<article class="song-card" data-song="{{ song|lower }}">
+
+<div class="cover">
+<img src="{{ url_for('logo') }}" alt="SurMaya">
+</div>
+
+<div class="song-title" title="{{ song }}">{{ song }}</div>
+
+<div class="artist">SurMaya Music</div>
+
+<audio controls preload="none">
+<source src="{{ url_for('songs', filename=song) }}">
+</audio>
+
+<a class="download"
+href="{{ url_for('download_song', filename=song) }}">
+⬇ Download
+</a>
+
+{% if user and not user.is_admin %}
+<div class="actions">
+<button class="fav"
+data-song="{{ song }}"
+onclick="toggleFavourite(this)">
+♡ Favourite
+</button>
+</div>
+{% endif %}
+
+{% if user and user.is_admin %}
+<div class="actions">
+<form method="POST"
+action="{{ url_for('delete_song', filename=song) }}"
+style="width:100%"
+onsubmit="return confirm('Delete this song?')">
+
+<button class="delete" type="submit" style="width:100%">
+🗑️ Delete
+</button>
+
+</form>
+</div>
+{% endif %}
+
+</article>
+
+{% endfor %}
+
+</div>
+
+<div id="noResults" class="no-results">
+No matching song found.
+</div>
+
+</section>
+
+{% if user and not user.is_admin %}
+
+<section class="section" id="favourites">
+
+<h2>❤️ My Favourites</h2>
+<div class="section-sub">Your saved SurMaya songs.</div>
+
+<div class="song-grid" id="favGrid"></div>
+
+<div id="noFav" class="no-results">
+You haven't added any favourites yet.
+</div>
+
+</section>
+
+{% endif %}
+
+{% if not user %}
+
+<section class="panel" id="account">
+
+<h2>👤 Join SurMaya Music</h2>
+
+<p>Sign in to save favourites, or create your free account.</p>
+
+{% if request.args.get('auth_error') %}
+<div class="error">
+{{ request.args.get('auth_error') }}
+</div>
+{% endif %}
+
+<div class="auth-tabs">
+
+<button id="loginTab" class="tab active"
+onclick="showAuth('login')">
+Sign In
+</button>
+
+<button id="signupTab" class="tab"
+onclick="showAuth('signup')">
+Create Account
+</button>
+
+</div>
+
+<form id="loginForm"
+class="form auth-form"
+method="POST"
+action="{{ url_for('login') }}">
+
+<input type="email" name="email"
+placeholder="Email" required>
+
+<input type="password" name="password"
+placeholder="Password" required>
+
+<button class="primary" type="submit">
+Sign In
+</button>
+
+</form>
+
+<form id="signupForm"
+class="form auth-form hidden"
+method="POST"
+action="{{ url_for('signup') }}">
+
+<input type="email" name="email"
+placeholder="Email" required>
+
+<input type="password" name="password"
+minlength="6"
+placeholder="Password (6+ characters)"
+required>
+
+<button class="primary" type="submit">
+Create Account
+</button>
+
+</form>
+
+</section>
+
+{% endif %}
+
+<section class="about" id="about">
+
+<img src="{{ url_for('logo') }}" alt="SurMaya Music">
+
+<h2>SurMaya Music</h2>
+
+<p>
+<b>Dil Se Suno.</b> SurMaya Music is a growing music platform
+focused on sound, emotion and new creative voices.
+</p>
+
+<p>
+CEO of SurMaya Music — <b>Aayush Raj</b>
+</p>
+
+</section>
+
+{% if user and user.is_admin %}
+
+<section class="upload">
+
+<h2>👑 Admin — Upload Music</h2>
+
+<div class="upload-text">
+Only the admin account can add new tracks.
+</div>
+
+<form method="POST"
+action="{{ url_for('upload') }}"
+enctype="multipart/form-data">
+
+<input type="file"
+name="song"
+accept=".mp3,.wav,.ogg"
+required>
+
+<button type="submit">Upload Song</button>
+
+</form>
+
+</section>
+
+{% endif %}
+
+</main>
+
+<footer>
+© 2026 SurMaya Music • Dil Se Suno
+</footer>
+
+<script>
+
+const search = document.getElementById('songSearch');
+
+const cards = [
+  ...document.querySelectorAll('#songGrid .song-card')
+];
+
+const noResults = document.getElementById('noResults');
+
+if (search) {
+  search.addEventListener('input', () => {
+
+    const q = search.value.trim().toLowerCase();
+    let n = 0;
+
+    cards.forEach(card => {
+
+      const ok = card.dataset.song.includes(q);
+
+      card.style.display = ok ? '' : 'none';
+
+      if (ok) n++;
+
+    });
+
+    noResults.style.display = n ? 'none' : 'block';
+
+  });
+}
+
+function showAuth(type) {
+
+  const login = document.getElementById('loginForm');
+  const signup = document.getElementById('signupForm');
+
+  const loginTab = document.getElementById('loginTab');
+  const signupTab = document.getElementById('signupTab');
+
+  if (!login || !signup) return;
+
+  if (type === 'signup') {
+
+    login.classList.add('hidden');
+    signup.classList.remove('hidden');
+
+    loginTab.classList.remove('active');
+    signupTab.classList.add('active');
+
+  } else {
+
+    signup.classList.add('hidden');
+    login.classList.remove('hidden');
+
+    signupTab.classList.remove('active');
+    loginTab.classList.add('active');
+
+  }
+
+}
+
+const initialTab =
+'{{ request.args.get("auth_tab", "login") }}';
+
+if (initialTab === 'signup') {
+  showAuth('signup');
+}
+
+function logoutUser() {
+  window.location.href = '{{ url_for("logout") }}';
+}
+
+async function toggleFavourite(button) {
+
+  const song = button.dataset.song;
+
+  const active = button.classList.contains('active');
+
+  const endpoint = active
+    ? '/api/favourite/remove'
+    : '/api/favourite';
+
+  try {
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        song_name: song
+      })
+    });
+
+    if (!response.ok) {
+      alert('Please sign in first.');
+      return;
+    }
+
+    button.classList.toggle('active');
+
+    button.textContent =
+      button.classList.contains('active')
+      ? '♥ Favourite'
+      : '♡ Favourite';
+
+    loadFavourites();
+
+  } catch (error) {
+
+    alert('Something went wrong.');
+
+  }
+
+}
+
+async function loadFavourites() {
+
+  const grid = document.getElementById('favGrid');
+
+  if (!grid) return;
+
+  try {
+
+    const response = await fetch('/api/favourites');
+
+    const names = await response.json();
+
+    const set = new Set(
+      names.map(name => name.toLowerCase())
+    );
+
+    cards.forEach(card => {
+
+      const button = card.querySelector('.fav');
+
+      if (button) {
+
+        const on = set.has(
+          button.dataset.song.toLowerCase()
+        );
+
+        button.classList.toggle('active', on);
+
+        button.textContent =
+          on ? '♥ Favourite' : '♡ Favourite';
+
+      }
+
+    });
+
+    grid.innerHTML = '';
+
+    names.forEach(name => {
+
+      const original = cards.find(card =>
+        card.dataset.song === name.toLowerCase()
+      );
+
+      if (original) {
+
+        const clone = original.cloneNode(true);
+
+        const button = clone.querySelector('.fav');
+
+        if (button) {
+
+          button.classList.add('active');
+          button.textContent = '♥ Favourite';
+
+        }
+
+        grid.appendChild(clone);
+
+      }
+
+    });
+
+    const noFav = document.getElementById('noFav');
+
+    if (noFav) {
+      noFav.style.display =
+        names.length ? 'none' : 'block';
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}
+
+{% if user and not user.is_admin %}
+loadFavourites();
+{% endif %}
+
+</script>
+
+</body>
+</html>
