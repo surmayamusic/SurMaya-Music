@@ -4,7 +4,6 @@ import os
 
 app = Flask(__name__)
 
-# Supabase
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
@@ -45,7 +44,9 @@ def upload():
             supabase.storage.from_(BUCKET_NAME).upload(
                 filename,
                 file_data,
-                {"content-type": song.content_type or "audio/mpeg"}
+                {
+                    "content-type": song.content_type or "audio/mpeg"
+                }
             )
 
             print("Song uploaded successfully:", filename)
@@ -68,4 +69,7 @@ def songs(filename):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
